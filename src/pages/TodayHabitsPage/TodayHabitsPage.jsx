@@ -8,9 +8,9 @@ export default function TodayHabitsPage() {
     return(
         <PageContainer>
             <Topbar/>
-            <Day>Segunda, 17/05</Day>
-            {/* <ProgressText>Nenhum hábito concluído ainda</ProgressText> */}
-            <ProgressText progress={"true"}>67% dos hábitos concluídos</ProgressText>
+            <Day  data-test="today">Segunda, 17/05</Day>
+            <ProgressText data-test="today-counter">Nenhum hábito concluído ainda</ProgressText>
+            <ProgressText progress={"true"} data-test="today-counter">67% dos hábitos concluídos</ProgressText>
             <TodayHabList/>
             <Footer/>
         </PageContainer>

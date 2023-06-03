@@ -4,34 +4,34 @@ import check from "../../assets/imgs/check.svg"
 export default function TodayHabList() {
     return (
         <>
-            <ListItem>
-                <CheckBox>
+            <ListItem data-test="today-habit-container">
+                <CheckBox data-test="today-habit-check-btn">
                     <img src={check} alt="checkmark" />
                 </CheckBox>
                 <HabitInfo>
-                    <HabitName>Ler 1 capítulo do livro</HabitName>
-                    <p>Sequência atual: <strong >4 dias</strong></p>
-                    <p>Seu recorde: <strong>5 dias</strong></p>
+                    <HabitName data-test="today-habit-name">Ler 1 capítulo do livro</HabitName>
+                    <p data-test="today-habit-sequence">Sequência atual: <strong >4 dias</strong></p>
+                    <p data-test="today-habit-record">Seu recorde: <strong>5 dias</strong></p>
                 </HabitInfo>
             </ListItem>
-            <ListItem>
-                <CheckBox>
+            <ListItem data-test="today-habit-container">
+                <CheckBox data-test="today-habit-check-btn">
                     <img src={check} alt="checkmark" />
                 </CheckBox>
                 <HabitInfo>
-                    <HabitName>Ler 1 capítulo do livro</HabitName>
-                    <p>Sequência atual: <strong >4 dias</strong></p>
-                    <p>Seu recorde: <strong>5 dias</strong></p>
+                    <HabitName data-test="today-habit-name">Ler 1 capítulo do livro</HabitName>
+                    <p data-test="today-habit-sequence">Sequência atual: <strong >4 dias</strong></p>
+                    <p data-test="today-habit-record">Seu recorde: <strong>5 dias</strong></p>
                 </HabitInfo>
             </ListItem>
-            <ListItem>
-                <CheckBox>
+            <ListItem data-test="today-habit-container">
+                <CheckBox data-test="today-habit-check-btn">
                     <img src={check} alt="checkmark" />
                 </CheckBox>
                 <HabitInfo>
-                    <HabitName>Ler 1 capítulo do livro</HabitName>
-                    <p>Sequência atual: <strong >4 dias</strong></p>
-                    <p>Seu recorde: <strong>5 dias</strong></p>
+                    <HabitName data-test="today-habit-name">Ler 1 capítulo do livro</HabitName>
+                    <p data-test="today-habit-sequence">Sequência atual: <strong >4 dias</strong></p>
+                    <p data-test="today-habit-record">Seu recorde: <strong>5 dias</strong></p>
                 </HabitInfo>
             </ListItem>
         </>
@@ -48,7 +48,7 @@ const ListItem = styled.div`
     margin-left: 17px;
 `
 
-const CheckBox = styled.div`
+const CheckBox = styled.button`
     position: relative;
     top: 0;
     left: 243px;
@@ -59,6 +59,7 @@ const CheckBox = styled.div`
     border-radius: 5px;
     align-items: center;
     justify-content: center;
+    border: 0;
 `
 
 const HabitInfo = styled.div`

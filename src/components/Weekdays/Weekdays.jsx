@@ -4,13 +4,13 @@ import { styledDaySelect } from "../../constants/styledDaySelect";
 export default function Weekdays () {
     return(
         <div>
-            <Day selected= {false}>D</Day>
-            <Day selected= {styledDaySelect}>S</Day>
-            <Day selected= {false}>T</Day>
-            <Day selected= {false}>Q</Day>
-            <Day selected= {styledDaySelect}>Q</Day>
-            <Day selected= {false}>S</Day>
-            <Day selected= {false}>S</Day>
+            <Day selected= {false} data-test="habit-day">D</Day>
+            <Day selected= {styledDaySelect} data-test="habit-day">S</Day>
+            <Day selected= {false} data-test="habit-day">T</Day>
+            <Day selected= {false} data-test="habit-day">Q</Day>
+            <Day selected= {styledDaySelect} data-test="habit-day">Q</Day>
+            <Day selected= {false} data-test="habit-day">S</Day>
+            <Day selected= {false} data-test="habit-day">S</Day>
         </div>
     )
 }

@@ -2,10 +2,10 @@ import styled from "styled-components"
 
 export default function Footer () {
     return (
-        <StyledFooter>
-            <p>Hábitos</p>
-            <CenterButton>Hoje</CenterButton>
-            <p>Histórico</p>
+        <StyledFooter data-test="menu">
+            <p data-test="habit-link">Hábitos</p>
+            <CenterButton data-test="today-link">Hoje</CenterButton>
+            <p data-test="history-link">Histórico</p>
         </StyledFooter>
     )
 }

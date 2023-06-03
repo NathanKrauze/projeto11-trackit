@@ -3,18 +3,18 @@ import Weekdays from "../Weekdays/Weekdays";
 
 export default function HabitsForm () {
     return (
-        <StyledForm>
-            <input type="text" placeholder="nome do hábito" />
+        <StyledForm data-test="habit-create-container">
+            <input type="text" placeholder="nome do hábito" data-test="habit-name-input" />
             <Weekdays />
             <ActionButtons>
-                <CancelButton>Cancelar</CancelButton>
-                <SaveButton>Salvar</SaveButton>
+                <CancelButton data-test="habit-create-cancel-btn">Cancelar</CancelButton>
+                <SaveButton data-test="habit-create-save-btn">Salvar</SaveButton>
             </ActionButtons>
         </StyledForm>
     )
 }
 
-const StyledForm = styled.form`
+const StyledForm = styled.div`
     margin: 0 17px 20px 17px;
     padding: 17px;
     background: #FFFFFF;

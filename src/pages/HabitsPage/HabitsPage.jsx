@@ -12,10 +12,10 @@ export default function HabitsPage() {
             <ContentContainer>
                 <AddDiv>
                     <h1>Meus Hábitos</h1>
-                    <AddButton>+</AddButton>
+                    <AddButton data-test="habit-create-btn">+</AddButton>
                 </AddDiv>
-                {/* <HabitsForm /> */}
-                {/* <NoHabitsMsg>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</NoHabitsMsg> */}
+                <HabitsForm />
+                <NoHabitsMsg>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</NoHabitsMsg>
                 <HabitsList />
             </ContentContainer>
             <Footer />

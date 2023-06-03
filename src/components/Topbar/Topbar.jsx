@@ -3,9 +3,9 @@ import smallLogo from "../../assets/imgs/smallLogo.png"
 
 export default function Topbar () {
     return (
-        <NavbarContainer>
+        <NavbarContainer data-test="header">
             <SmallLogo  src={smallLogo} alt="TrackIt" />
-            <Profile src="https://i0.wp.com/omeudiadia.com.br/wp-content/uploads/2022/04/gatinho-fofo-segurando-as-suas-2-patinhas-1.jpg?resize=564%2C564&ssl=1" alt="Profile" />
+            <Profile data-test="avatar" src="https://i0.wp.com/omeudiadia.com.br/wp-content/uploads/2022/04/gatinho-fofo-segurando-as-suas-2-patinhas-1.jpg?resize=564%2C564&ssl=1" alt="Profile" />
         </NavbarContainer>
     )
 }

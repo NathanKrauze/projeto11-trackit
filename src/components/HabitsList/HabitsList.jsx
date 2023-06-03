@@ -5,19 +5,19 @@ import trashCan from "../../assets/imgs/trashCan.png"
 export default function HabitsList () {
     return (
         <List>
-            <ListItem>
-                <TrashIcon src={trashCan} alt="trashCan" />
-                <HabitName>Ler 1 capítulo do livro</HabitName>
+            <ListItem data-test="habit-container">
+                <TrashIcon src={trashCan} alt="trashCan"  data-test="habit-delete-btn"/>
+                <HabitName data-test="habit-name">Ler 1 capítulo do livro</HabitName>
                 <Weekdays />
             </ListItem>
-            <ListItem>
-                <TrashIcon src={trashCan} alt="trashCan" />
-                <HabitName>Ler 1 capítulo do livro</HabitName>
+            <ListItem data-test="habit-container">
+                <TrashIcon src={trashCan} alt="trashCan"  data-test="habit-delete-btn"/>
+                <HabitName data-test="habit-name">Ler 1 capítulo do livro</HabitName>
                 <Weekdays />
             </ListItem>
-            <ListItem>
-                <TrashIcon src={trashCan} alt="trashCan" />
-                <HabitName>Ler 1 capítulo do livro</HabitName>
+            <ListItem data-test="habit-container">
+                <TrashIcon src={trashCan} alt="trashCan"  data-test="habit-delete-btn"/>
+                <HabitName data-test="habit-name">Ler 1 capítulo do livro</HabitName>
                 <Weekdays />
             </ListItem>
         </List>
