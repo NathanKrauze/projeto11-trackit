@@ -14,8 +14,6 @@ const GlobalStyle = createGlobalStyle`
         height: 45px;
         margin-bottom: 6px;
         box-sizing: border-box;
-        background: #FFFFFF;
-        border: 1px solid #D5D5D5;
         border-radius: 5px;
         font-size: 20px;
         padding-left: 11px;
