@@ -18,8 +18,8 @@ export const StyledForm = styled.form`
     flex-direction:column;
 
     input{
-        background: ${props => props.loading !== 'enabled' ? "#FFFFFF" : "#F2F2F2"};
-        border: 1px solid ${props => props.loading !== 'enabled' ? "#D5D5D5" : "#D4D4D4"};
+        background: ${props => props.loading === 'enabled' ? "#FFFFFF" : "#F2F2F2"};
+        border: 1px solid ${props => props.loading === 'enabled' ? "#D5D5D5" : "#D4D4D4"};
     }
 
     button{

@@ -25,6 +25,17 @@ export default function SignUpPage() {
         password: password
     }
 
+    function reloadingForm (error) {
+        alert(error.response.data.message);
+        setBtnContent('Cadastrar');
+        setLoading(false);
+        setInptDisabled('enabled');
+        setEmail('')
+        setName('')
+        setImage('')
+        setPassword('')
+    }
+
     function sendRegstration (e){
         e.preventDefault();
 
@@ -34,7 +45,7 @@ export default function SignUpPage() {
 
         axios.post(`${baseURL}/auth/sign-up`, cadastro)
         .then( resp => navigate('/hoje'))
-        .catch( error => alert(error.response.data.message))
+        .catch(error => reloadingForm(error))
     }
 
     return (
@@ -48,6 +59,7 @@ export default function SignUpPage() {
                     value={email} 
                     onChange={e => setEmail(e.target.value)}
                     disabled={loading}
+                    required
                     />
                 <input 
                     data-test="password-input"
@@ -56,6 +68,7 @@ export default function SignUpPage() {
                     value={password} 
                     onChange={e => setPassword(e.target.value)}
                     disabled={loading}
+                    required
                     />
                 <input 
                     data-test="user-name-input"
@@ -64,6 +77,7 @@ export default function SignUpPage() {
                     value={name} 
                     onChange={e => setName(e.target.value)}
                     disabled={loading}
+                    required
                     />
                 <input 
                     data-test="user-image-input"
@@ -72,6 +86,7 @@ export default function SignUpPage() {
                     value={image} 
                     onChange={e => setImage(e.target.value)}
                     disabled={loading}
+                    required
                     />
                 <button type="submit" data-test="signup-btn" disabled={loading}>
                     {btnContent}
