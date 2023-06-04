@@ -3,8 +3,13 @@ import Topbar from "../../components/Topbar/Topbar";
 import Footer from "../../components/Footer/Footer";
 import TodayHabList from "../../components/TodayHabList/TodayHabList";
 import { PageContainer, Day, ProgressText } from "./styled";
+import { useContext } from "react"
+import { accessAuth } from "../../contexts/accessAuth";
 
 export default function TodayHabitsPage() {
+
+    const {auth} = useContext(accessAuth)
+
     return(
         <PageContainer>
             <Topbar/>

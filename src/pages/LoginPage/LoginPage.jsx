@@ -5,9 +5,12 @@ import axios from "axios"
 import { useState } from "react"
 import { ThreeDots } from "react-loader-spinner";
 import { baseURL } from "../../constants/baseURL"
+import { useContext } from "react"
+import { accessAuth } from "../../contexts/accessAuth"
 
 
 export default function LoginPage() {
+    const {setAuth} = useContext(accessAuth)
 
     const [ email, setEmail] = useState('')
     const [ password, setPassword] = useState('')
@@ -30,6 +33,12 @@ export default function LoginPage() {
         setPassword('')
     }
 
+    function success(resp){
+        navigate('/hoje')
+        setAuth(resp.data)
+    }
+
+
     function sendLogin(e){
         e.preventDefault();
 
@@ -38,7 +47,7 @@ export default function LoginPage() {
         setInptDisabled('disabled')
 
         axios.post(`${baseURL}/auth/login`, login)
-        .then( resp => navigate('/hoje'))
+        .then( resp => success(resp))
         .catch(error => reloadingForm(error))
 
         

@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom"
 import axios from "axios";
 import { baseURL } from "../../constants/baseURL";
 import { ThreeDots } from "react-loader-spinner";
-import styled from "styled-components";
 
 export default function SignUpPage() {
 
@@ -44,7 +43,7 @@ export default function SignUpPage() {
         setInptDisabled('disabled')
 
         axios.post(`${baseURL}/auth/sign-up`, cadastro)
-        .then( resp => navigate('/hoje'))
+        .then( resp => navigate('/'))
         .catch(error => reloadingForm(error))
     }
 

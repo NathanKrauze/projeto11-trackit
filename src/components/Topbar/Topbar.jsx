@@ -1,11 +1,16 @@
 import styled from "styled-components"
 import smallLogo from "../../assets/imgs/smallLogo.png"
+import { useContext } from "react"
+import { accessAuth } from "../../contexts/accessAuth"
 
 export default function Topbar () {
+
+    const {auth}= useContext(accessAuth)
+
     return (
         <NavbarContainer data-test="header">
             <SmallLogo  src={smallLogo} alt="TrackIt" />
-            <Profile data-test="avatar" src="https://i0.wp.com/omeudiadia.com.br/wp-content/uploads/2022/04/gatinho-fofo-segurando-as-suas-2-patinhas-1.jpg?resize=564%2C564&ssl=1" alt="Profile" />
+            <Profile data-test="avatar" src={auth.image} alt="avatar" />
         </NavbarContainer>
     )
 }
@@ -31,7 +36,8 @@ const SmallLogo = styled.img`
 
 const Profile = styled.img`
     width: 51px;
-    height: auto;
-    border-radius: 51px;
+    height: 51px;
+    object-fit: cover;
+    border-radius: 50%;
     margin-right: 18px;
 `
