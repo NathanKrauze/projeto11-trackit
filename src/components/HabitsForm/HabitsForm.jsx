@@ -8,26 +8,15 @@ import { accessAuth } from "../../contexts/accessAuth"
 import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
 
-export default function HabitsForm ({setShowAddHabit}) {
+export default function HabitsForm (props) {
+
+    const {setShowAddHabit, name, setName, daysSelected, setDaysSelected, habit, setHabits} = props
 
     const {auth} = useContext(accessAuth)
 
-    const [name, setName] = useState('')
-    const [daysSelected, setDaysSelected] = useState([])
     const [ loading, setLoading] =useState(false)
     const [ inptDisabled, setInptDisabled] = useState('enabled')
     const [ btnContent, setBtnContent] = useState('Salvar')
-
-    const authorization = {
-        headers: {
-            "Authorization": `Bearer ${auth.token}`
-        }
-    } 
-
-    const newHabit = {
-        name: name,
-        days: daysSelected.map(day => day.id)
-    }
 
     function selectDay (day) {
         const isSelected = daysSelected.some(d => d.id === day.id)
@@ -40,11 +29,22 @@ export default function HabitsForm ({setShowAddHabit}) {
         }
     }
 
+    const authorization = {
+        headers: {
+            "Authorization": `Bearer ${auth.token}`
+        }
+    } 
+
     function sendingHabit(){
         setShowAddHabit(false)
         setLoading(false);
         setInptDisabled('enabled')
         setBtnContent('Salvar')
+        setName('')
+        setDaysSelected([])
+        axios.get(`${baseURL}/habits`, authorization)
+        .then(resp => setHabits(resp.data))
+        .catch(err => alert(err.response.data.message))
     }
 
     function sendingError(err){
@@ -53,12 +53,22 @@ export default function HabitsForm ({setShowAddHabit}) {
         setInptDisabled('enabled')
         setBtnContent('Salvar')
     }
-
+    
+    function cancelCriation () {
+        setName([...name].join(''))
+        setDaysSelected([...daysSelected])
+        setShowAddHabit(false)
+    }
+     
     function sendHabit (event) {
         event.preventDefault()
         setLoading(true);
         setInptDisabled('disabled')
         setBtnContent(null)
+        const newHabit = {
+            name: name,
+            days: daysSelected.map(day => day.id)
+        }
 
         axios.post(`${baseURL}/habits`, newHabit, authorization)
         .then( resp => sendingHabit(resp))
@@ -83,7 +93,7 @@ export default function HabitsForm ({setShowAddHabit}) {
                         isSelected={daysSelected.some(d => d.id === day.id)}
                         disabled={loading}/>
                 ))}
-            <CancelButton  data-test="habit-create-cancel-btn" type="button" onClick={()=>setShowAddHabit(false)} disabled={loading}>Cancelar</CancelButton>
+            <CancelButton  data-test="habit-create-cancel-btn" type="button" onClick={cancelCriation} disabled={loading}>Cancelar</CancelButton>
             <SaveButton type="submit" data-test="habit-create-save-btn" disabled={loading}>
                 {btnContent}
                 <ThreeDots color="#FFFFFF" width="43px" height="11px" visible={loading} ></ThreeDots>
