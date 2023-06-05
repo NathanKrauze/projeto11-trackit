@@ -7,7 +7,7 @@ export const PageContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items:  center;
-
+    
     p{
         color: #52B6FF;
         text-decoration: #52B6FF underline;

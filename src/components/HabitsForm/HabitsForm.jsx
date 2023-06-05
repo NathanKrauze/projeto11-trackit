@@ -1,43 +1,127 @@
 import styled from "styled-components";
-import Weekdays from "../Weekdays/Weekdays";
+import WeekdaySelect from "../WeekdaySelect/WeekdaySelect";
+import { useState } from "react";
+import { days } from "../../constants/days";
+import { baseURL} from "../../constants/baseURL"
+import { useContext } from "react";
+import { accessAuth } from "../../contexts/accessAuth"
+import axios from "axios";
+import { ThreeDots } from "react-loader-spinner";
 
-export default function HabitsForm () {
+export default function HabitsForm ({setShowAddHabit}) {
+
+    const {auth} = useContext(accessAuth)
+
+    const [name, setName] = useState('')
+    const [daysSelected, setDaysSelected] = useState([])
+    const [ loading, setLoading] =useState(false)
+    const [ inptDisabled, setInptDisabled] = useState('enabled')
+    const [ btnContent, setBtnContent] = useState('Salvar')
+
+    const authorization = {
+        headers: {
+            "Authorization": `Bearer ${auth.token}`
+        }
+    } 
+
+    const newHabit = {
+        name: name,
+        days: daysSelected.map(day => day.id)
+    }
+
+    function selectDay (day) {
+        const isSelected = daysSelected.some(d => d.id === day.id)
+        if (isSelected){
+            const newList =  daysSelected.filter(d => d.id !== day.id)
+            setDaysSelected(newList)
+        }
+        else {
+            setDaysSelected([...daysSelected, day])
+        }
+    }
+
+    function sendingHabit(){
+        setShowAddHabit(false)
+        setLoading(false);
+        setInptDisabled('enabled')
+        setBtnContent('Salvar')
+    }
+
+    function sendingError(err){
+        alert(err.response.data.message)
+        setLoading(false);
+        setInptDisabled('enabled')
+        setBtnContent('Salvar')
+    }
+
+    function sendHabit (event) {
+        event.preventDefault()
+        setLoading(true);
+        setInptDisabled('disabled')
+        setBtnContent(null)
+
+        axios.post(`${baseURL}/habits`, newHabit, authorization)
+        .then( resp => sendingHabit(resp))
+        .catch( err => sendingError(err))
+    }
+
     return (
-        <StyledForm data-test="habit-create-container">
-            <input type="text" placeholder="nome do hábito" data-test="habit-name-input" />
-            <Weekdays />
-            <ActionButtons>
-                <CancelButton data-test="habit-create-cancel-btn">Cancelar</CancelButton>
-                <SaveButton data-test="habit-create-save-btn">Salvar</SaveButton>
-            </ActionButtons>
+        <StyledForm onSubmit={sendHabit} data-test="habit-create-container" loading={inptDisabled}>
+            <input 
+                data-test="habit-name-input" 
+                type="text" 
+                placeholder="nome do hábito"
+                value={name}
+                onChange={e => setName(e.target.value)}
+                disabled={loading}
+            />
+                {days.map( day => (               
+                    <WeekdaySelect
+                        day={day} 
+                        key={day.id}
+                        selectDay={() => selectDay(day)}
+                        isSelected={daysSelected.some(d => d.id === day.id)}
+                        disabled={loading}/>
+                ))}
+            <CancelButton  data-test="habit-create-cancel-btn" type="button" onClick={()=>setShowAddHabit(false)} disabled={loading}>Cancelar</CancelButton>
+            <SaveButton type="submit" data-test="habit-create-save-btn" disabled={loading}>
+                {btnContent}
+                <ThreeDots color="#FFFFFF" width="43px" height="11px" visible={loading} ></ThreeDots>
+            </SaveButton>
         </StyledForm>
     )
 }
 
-const StyledForm = styled.div`
+
+const StyledForm = styled.form`
     margin: 0 17px 20px 17px;
     padding: 17px;
     background: #FFFFFF;
     border-radius: 5px;
-`
 
-const ActionButtons = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: right;
-    margin-top: 29px;
+    input{
+        background: ${props => props.loading === 'enabled' ? "#FFFFFF" : "#F2F2F2"};
+        border: 1px solid ${props => props.loading === 'enabled' ? "#D5D5D5" : "#D4D4D4"};
+    }
 `
 
 const CancelButton = styled.button`
+    position: relative;
+    top: 0px;
+    left: 133px;
     background-color: transparent;
     border: 0;
     font-size: 16px;
     color: #52B6FF;
     text-align: center;
+    margin-top: 29px;
     margin-right: 23px;
 `
 
 const SaveButton= styled.button`
+    position: relative;
+    top: 0;
+    left: 125px;
     width:84px;
     height: 35px;
     text-align:center;
@@ -46,4 +130,6 @@ const SaveButton= styled.button`
     border: 0;
     color: #FFFFFF;
     font-size: 16px;
+    margin-top: 29px;
+
 `

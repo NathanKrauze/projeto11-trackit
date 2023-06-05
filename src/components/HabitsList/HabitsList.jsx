@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Weekdays from "../Weekdays/Weekdays";
+import Weekday from "../WeekdaySelect/WeekdaySelect";
 import trashCan from "../../assets/imgs/trashCan.png"
 
 export default function HabitsList () {
@@ -8,17 +8,17 @@ export default function HabitsList () {
             <ListItem data-test="habit-container">
                 <TrashIcon src={trashCan} alt="trashCan"  data-test="habit-delete-btn"/>
                 <HabitName data-test="habit-name">Ler 1 capítulo do livro</HabitName>
-                <Weekdays />
+                <Weekday />
             </ListItem>
             <ListItem data-test="habit-container">
                 <TrashIcon src={trashCan} alt="trashCan"  data-test="habit-delete-btn"/>
                 <HabitName data-test="habit-name">Ler 1 capítulo do livro</HabitName>
-                <Weekdays />
+                <Weekday />
             </ListItem>
             <ListItem data-test="habit-container">
                 <TrashIcon src={trashCan} alt="trashCan"  data-test="habit-delete-btn"/>
                 <HabitName data-test="habit-name">Ler 1 capítulo do livro</HabitName>
-                <Weekdays />
+                <Weekday />
             </ListItem>
         </List>
     )

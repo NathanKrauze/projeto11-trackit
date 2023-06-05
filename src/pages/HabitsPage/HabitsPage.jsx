@@ -2,21 +2,44 @@ import Topbar from "../../components/Topbar/Topbar"
 import HabitsForm from "../../components/HabitsForm/HabitsForm"
 import HabitsList from "../../components/HabitsList/HabitsList"
 import Footer from "../../components/Footer/Footer"
-import styled, { createGlobalStyle } from "styled-components"
 import { ContentContainer, AddDiv, AddButton, NoHabitsMsg } from "./styled"
+import { useEffect } from "react"
+import { baseURL } from "../../constants/baseURL"
+import { useContext } from "react"
+import { accessAuth } from "../../contexts/accessAuth"
+import axios from "axios"
+import { useState } from "react"
+
 
 export default function HabitsPage() {
+
+    const{auth} = useContext(accessAuth)
+    const [showAddHabit, setShowAddHabit] = useState(false)
+
+
+    const authorization = {
+        headers: {
+            "Authorization": `Bearer ${auth.token}`
+        }
+    }
+
+    useEffect (() => {
+         axios.get(`${baseURL}/habits`, authorization)
+         .then( resp => console.log(resp))
+         .catch( error => console.log(error.response))
+    }, [])
+
     return (
         <>
             <Topbar />
             <ContentContainer>
                 <AddDiv>
                     <h1>Meus Hábitos</h1>
-                    <AddButton data-test="habit-create-btn">+</AddButton>
+                    <AddButton data-test="habit-create-btn" onClick={()=>setShowAddHabit(true)}>+</AddButton>
                 </AddDiv>
-                <HabitsForm />
+                {showAddHabit && (<HabitsForm setShowAddHabit={setShowAddHabit}/>)}
                 <NoHabitsMsg>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</NoHabitsMsg>
-                <HabitsList />
+                {/* <HabitsList /> */}
             </ContentContainer>
             <Footer />
         </>
