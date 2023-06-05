@@ -10,7 +10,7 @@ import { useContext, useState } from "react"
 export default function App() {
 
   const [auth, setAuth] = useState({});
-
+  const [habitsDone, setHabitsDone] = useState({})
 
   return (
     <accessAuth.Provider value={{auth, setAuth}}>
