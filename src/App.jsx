@@ -11,10 +11,10 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/hoje' element= {<LoginPage />} />
+        <Route path='/' element= {<LoginPage />} />
         <Route path='/cadastro' element= {<SignUpPage />} />
         <Route path='/habitos' element= {<HabitsPage />} />
-        <Route path='/' element= {<TodayPage />} />
+        <Route path='/hoje' element= {<TodayPage />} />
         <Route path='/historico' element= {<HistoricPage />} />
       </Routes>
     </BrowserRouter>
